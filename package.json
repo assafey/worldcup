@@ -1,0 +1,36 @@
+{
+  "name": "worldcup",
+  "version": "0.0.5",
+  "description": "World Cup",
+  "scripts": {
+    "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . --archiveFile ./dist/worldcup.bna",
+    "publish": "composer network install --card PeerAdmin@hlfv1 --archiveFile ./dist/worldcup.bna",
+    "start:network": "composer network start --card PeerAdmin@hlfv1 --networkAdmin admin --networkAdminEnrollSecret adminpw --networkName worldcup --file networkadmin.card",
+    "start:server": "composer-rest-server --card admin@worldcup --namespaces always --authentication false --websockets true --tls false",
+    "pretest": "npm run lint",
+    "lint": "eslint .",
+    "test": "nyc mocha -t 0 test/*.js && cucumber-js"
+  },
+  "author": "Assaf Grimberg",
+  "email": "assaf@innovid.com",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "composer-admin": "^0.19.1",
+    "composer-cli": "^0.19.1",
+    "composer-client": "^0.19.1",
+    "composer-common": "^0.19.1",
+    "composer-connector-embedded": "^0.19.1",
+    "express": "^4.16.3",
+    "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "composer-cucumber-steps": "^0.19.1",
+    "composer-rest-server": "^0.19.1",
+    "cucumber": "^4.2.1",
+    "eslint": "^4.19.1",
+    "mocha": "^5.1.1",
+    "nyc": "^11.7.1"
+  }
+}

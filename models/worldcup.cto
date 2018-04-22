@@ -1,0 +1,30 @@
+namespace worldcup
+
+participant User identified by email {
+  o String email
+  o String firstName
+  o String lastName
+}
+
+concept Bet {
+  --> User owner
+  o Integer homeScore range=[0,]
+  o Integer awayScore range=[0,]
+}
+
+asset Game identified by gameId {
+  o String gameId
+  o String homeTeam
+  o String awayTeam
+  o Bet[] bets
+}
+
+transaction AddBet {
+  --> Game game
+  o Bet newBet
+}
+
+event BetAdded {
+  --> Game game
+  o Bet bet
+}
